@@ -10,6 +10,7 @@ import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
 import javax.inject.Inject;
+import no.datametrix.ebean.tx.entity.Contact;
 import no.datametrix.ebean.tx.entity.Customer;
 
 /**
@@ -17,7 +18,7 @@ import no.datametrix.ebean.tx.entity.Customer;
  * @author helge
  */
 @Stateless
-@TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
+@TransactionAttribute(TransactionAttributeType.REQUIRED)
 public class TxBean {
 
     @Inject
@@ -26,5 +27,10 @@ public class TxBean {
     public Customer saveCustomer(Customer customer) {
         ebeanServer.save(customer);
         return customer;
+    }
+    
+    public Contact saveContact(Contact contact) {
+        ebeanServer.save(contact);
+        return contact;
     }
 }

@@ -6,6 +6,7 @@
 package no.datametrix.ebean.tx.entity;
 
 import com.avaje.ebean.Model;
+import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -22,5 +23,6 @@ public abstract class BaseModel extends Model {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "ID")
     private Long id;
 }

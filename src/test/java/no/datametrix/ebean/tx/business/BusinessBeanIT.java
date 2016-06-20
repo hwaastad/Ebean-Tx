@@ -6,7 +6,7 @@
 package no.datametrix.ebean.tx.business;
 
 import java.util.Properties;
-import javax.ejb.embeddable.EJBContainer;
+import javax.inject.Inject;
 import no.datametrix.ebean.tx.producer.EbeansProducer;
 import org.apache.openejb.jee.EjbJar;
 import org.apache.openejb.junit.ApplicationComposer;
@@ -18,7 +18,6 @@ import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import static org.junit.Assert.*;
 import org.junit.runner.RunWith;
 
 /**
@@ -52,7 +51,7 @@ public class BusinessBeanIT {
     public EjbJar jar() {
         return new EjbJar();
     }
-    
+
     @Configuration
     public Properties properties() {
         Properties p = new Properties();
@@ -61,16 +60,22 @@ public class BusinessBeanIT {
         p.put("TestDS.JdbcUrl", "jdbc:hsqldb:mem:Test");
         p.put("TestDS.logSql", "true");
         p.put("TestDS.jtaManaged", "true");
-        p.put("openejb.log.factory","slf4j");
+        p.put("openejb.log.factory", "slf4j");
         return p;
     }
 
     /**
      * Test of doStuff method, of class BusinessBean.
      */
+    @Inject
+    private BusinessBean businessBean;
+
     @Test
     public void testDoStuff() throws Exception {
         System.out.println("doStuff");
+        businessBean.doStuff("bof");
+        businessBean.lookUp("bof");
+        businessBean.lookUp("bof");
     }
 
 }

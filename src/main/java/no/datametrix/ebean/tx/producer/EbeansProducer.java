@@ -33,8 +33,6 @@ public class EbeansProducer {
     @Produces
     @ApplicationScoped
     public EbeanServer getEbeansServer() {
-//        log.info("Producing ebeans server...");
-        //this.server = Ebean.getServer("TestDsServer");
         if (this.server == null) {
             initEserver();
         }
@@ -46,8 +44,6 @@ public class EbeansProducer {
     }
 
     private void initEserver() {
-        ContainerConfig cc = new ContainerConfig();
-
         ServerConfig config = new ServerConfig();
         config.setDataSource(datasource);
         config.setName("TestDsServer");
@@ -58,6 +54,7 @@ public class EbeansProducer {
         config.setAutoCommitMode(true);
         config.setDatabasePlatform(new HsqldbPlatform());
         config.setRegister(true);
+        config.setDefaultServer(true);
         
         this.server = EbeanServerFactory.create(config);
         Ebean.json();

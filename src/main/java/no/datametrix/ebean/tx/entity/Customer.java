@@ -5,6 +5,7 @@
  */
 package no.datametrix.ebean.tx.entity;
 
+import com.avaje.ebean.annotation.Cache;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -21,11 +22,16 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Table(name = "t_customer")
 @Entity
+@Cache(enableBeanCache = true,naturalKey = "name",enableQueryCache = true)
 public class Customer extends BaseModel {
-    
+
     private String name;
-    
+
     @OneToMany(mappedBy = "customer", cascade = CascadeType.PERSIST)
     private List<Contact> contacts;
-    
+
+    public Customer(String name) {
+        this.name = name;
+    }
+
 }
