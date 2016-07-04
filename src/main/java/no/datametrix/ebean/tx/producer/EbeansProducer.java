@@ -5,10 +5,8 @@
  */
 package no.datametrix.ebean.tx.producer;
 
-import com.avaje.ebean.Ebean;
 import com.avaje.ebean.EbeanServer;
 import com.avaje.ebean.EbeanServerFactory;
-import com.avaje.ebean.config.ContainerConfig;
 import com.avaje.ebean.config.ServerConfig;
 import com.avaje.ebean.config.dbplatform.HsqldbPlatform;
 import javax.annotation.Resource;
@@ -55,8 +53,13 @@ public class EbeansProducer {
         config.setDatabasePlatform(new HsqldbPlatform());
         config.setRegister(true);
         config.setDefaultServer(true);
+        config.getAutoTuneConfig().setProfiling(true);
+//        AutoTuneConfig tuneConfig = new AutoTuneConfig();
+//        tuneConfig.setMode(AutoTuneMode.DEFAULT_ON);
+//        tuneConfig.setProfiling(true);
+//        tuneConfig.setQueryTuning(true);
+//        config.setAutoTuneConfig(tuneConfig);
         
         this.server = EbeanServerFactory.create(config);
-        Ebean.json();
     }
 }

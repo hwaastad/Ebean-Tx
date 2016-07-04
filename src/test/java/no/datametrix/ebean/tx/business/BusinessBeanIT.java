@@ -7,6 +7,7 @@ package no.datametrix.ebean.tx.business;
 
 import java.util.Properties;
 import javax.inject.Inject;
+import no.datametrix.ebean.tx.entity.Customer;
 import no.datametrix.ebean.tx.producer.EbeansProducer;
 import org.apache.openejb.jee.EjbJar;
 import org.apache.openejb.junit.ApplicationComposer;

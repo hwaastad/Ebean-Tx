@@ -5,6 +5,8 @@
  */
 package no.datametrix.ebean.tx.entity;
 
+import no.datametrix.ebean.tx.entity.finder.ContactFinder;
+import com.avaje.ebean.annotation.Cache;
 import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -19,7 +21,10 @@ import lombok.Data;
 @Entity
 @Table(name = "t_contact")
 @Data
+@Cache
 public class Contact extends BaseModel implements Serializable {
+
+  public static final ContactFinder find = new ContactFinder();
 
     @Column(length = 50)
     private String firstName;

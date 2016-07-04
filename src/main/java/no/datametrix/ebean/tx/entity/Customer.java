@@ -5,6 +5,7 @@
  */
 package no.datametrix.ebean.tx.entity;
 
+import no.datametrix.ebean.tx.entity.finder.CustomerFinder;
 import com.avaje.ebean.annotation.Cache;
 import java.util.List;
 import javax.persistence.CascadeType;
@@ -22,8 +23,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Table(name = "t_customer")
 @Entity
-@Cache(enableBeanCache = true,naturalKey = "name",enableQueryCache = true)
+@Cache()
 public class Customer extends BaseModel {
+
+  public static final CustomerFinder find = new CustomerFinder();
 
     private String name;
 

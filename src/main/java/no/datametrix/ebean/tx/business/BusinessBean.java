@@ -30,9 +30,15 @@ public class BusinessBean {
         contact.setCustomer(customer);
         txBean.saveContact(contact);
     }
-    
-    public Customer lookUp(String name){
-        return ebeanServer.find(Customer.class).where().eq("name", name).setUseQueryCache(true).findUnique();
+
+    public Customer lookUp(String name) {
+        Customer findUnique = Customer.find.where().name.eq(name).findUnique();
+        //Customer findUnique = ebeanServer.find(Customer.class).where().eq("name", name).findUnique();
+       // Customer.find.where().name.eq(name).contacts.fetch().findUnique();
+        for(Contact c : findUnique.getContacts()){
+            c.getEmail();
+        }
+        return findUnique;
 //        return new QCustomer(ebeanServer).name.eq(name).findUnique();
     }
 }
