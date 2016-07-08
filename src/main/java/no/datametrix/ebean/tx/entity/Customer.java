@@ -7,6 +7,7 @@ package no.datametrix.ebean.tx.entity;
 
 import no.datametrix.ebean.tx.entity.finder.CustomerFinder;
 import com.avaje.ebean.annotation.Cache;
+import java.io.Serializable;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -24,9 +25,10 @@ import lombok.NoArgsConstructor;
 @Table(name = "t_customer")
 @Entity
 @Cache()
-public class Customer extends BaseModel {
+public class Customer extends BaseModel implements Serializable {
 
-  public static final CustomerFinder find = new CustomerFinder();
+    public static final CustomerFinder find = new CustomerFinder();
+    private static final long serialVersionUID = -51148103803100611L;
 
     private String name;
 

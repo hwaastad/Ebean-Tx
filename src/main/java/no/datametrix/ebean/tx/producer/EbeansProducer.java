@@ -53,7 +53,7 @@ public class EbeansProducer {
         config.setDatabasePlatform(new HsqldbPlatform());
         config.setRegister(true);
         config.setDefaultServer(true);
-        config.getAutoTuneConfig().setProfiling(true);
+        //config.getAutoTuneConfig().setProfiling(true);
 //        AutoTuneConfig tuneConfig = new AutoTuneConfig();
 //        tuneConfig.setMode(AutoTuneMode.DEFAULT_ON);
 //        tuneConfig.setProfiling(true);

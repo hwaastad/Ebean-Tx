@@ -12,6 +12,7 @@ import javax.ejb.TransactionAttributeType;
 import javax.inject.Inject;
 import no.datametrix.ebean.tx.entity.Contact;
 import no.datametrix.ebean.tx.entity.Customer;
+import no.datametrix.ebean.tx.entity.Sport;
 
 /**
  *
@@ -32,5 +33,10 @@ public class TxBean {
     public Contact saveContact(Contact contact) {
         ebeanServer.save(contact);
         return contact;
+    }
+    
+     public Sport saveSport(Sport sport) {
+        ebeanServer.save(sport);
+        return sport;
     }
 }

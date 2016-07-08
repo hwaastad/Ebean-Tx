@@ -6,10 +6,13 @@
 package no.datametrix.ebean.tx.business;
 
 import com.avaje.ebean.EbeanServer;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import no.datametrix.ebean.tx.entity.Contact;
 import no.datametrix.ebean.tx.entity.Customer;
+import no.datametrix.ebean.tx.entity.Sport;
+import no.datametrix.ebean.tx.entity.query.QContact;
 
 /**
  *
@@ -32,13 +35,36 @@ public class BusinessBean {
     }
 
     public Customer lookUp(String name) {
-        Customer findUnique = Customer.find.where().name.eq(name).findUnique();
+        Customer findUnique = Customer.find.where().name.eq(name).contacts.fetchAll().contacts.sports.fetchAll().findUnique();
+        //List<Customer> list = ebeanServer.find(Customer.class).findList();
         //Customer findUnique = ebeanServer.find(Customer.class).where().eq("name", name).findUnique();
-       // Customer.find.where().name.eq(name).contacts.fetch().findUnique();
-        for(Contact c : findUnique.getContacts()){
-            c.getEmail();
-        }
+        //List<Customer> list = Customer.find.where().contacts.fetchAll().findList();
+       
+        // Customer.find.where().name.eq(name).contacts.fetch().findUnique();
         return findUnique;
 //        return new QCustomer(ebeanServer).name.eq(name).findUnique();
+    }
+
+    public Customer createCustomer(String name) {
+        Customer c = new Customer(name);
+        txBean.saveCustomer(c);
+        return c;
+    }
+
+    public Contact createContact(String name, Customer cc) {
+        Customer ref = Customer.find.ref(cc.getId());
+        Contact c = new Contact(name);
+        c.setCustomer(ref);
+        cc.getContacts().add(c);
+        txBean.saveContact(c);
+        return c;
+    }
+
+    public Sport createSport(String name, Contact contact) {
+        Sport s = new Sport(name);
+        s.setContact(contact);
+        contact.getSports().add(s);
+        txBean.saveContact(contact);
+        return s;
     }
 }
